@@ -276,6 +276,104 @@ Esto es útil para:
 
 - Evitar reacciones erráticas del robot si una lectura puntual no refleja la realidad.
 
+### **Diagrama   PIC18F45K22**
+
+![DIAGRAMA](/imagenes/DIAGRAMA.png)
+## Ubicación en el diagrama:
+
+## Internal Oscillator Block
+
+## 1. Internal Oscillator Block + PLL
+```c 
+#pragma config FOSC = INTIO67  
+#pragma config PLLCFG = ON
+OSCCON = 0b01110000;
+OSCTUNEbits.PLLEN = 1;
+
+```
+- Ubicación en el diagrama:
+
+- Parte inferior izquierda: Internal Oscillator Block, PLL, OSCCON, OSCTUNE.
+
+Función: Configura el sistema de reloj interno del microcontrolador a 64 MHz utilizando el oscilador interno y el PLL (Phase Locked Loop), lo que impacta directamente en la precisión de los temporizadores y PWM.
+
+
+## 2. Puerto B como entrada digital
+```c 
+TRISBbits.TRISB0 = 1;
+TRISBbits.TRISB1 = 1;
+ANSELBbits.ANSB0 = 0;
+ANSELBbits.ANSB1 = 0;
+
+```
+## Ubicación en el diagrama:
+- Parte derecha, bloque PORTB (RB0-RB7)
+
+Función: Configura los pines RB0 y RB1 como entradas digitales para leer sensores.
+
+## 3 Puerto D como salida digital (control de motores)
+```c 
+TRISD &= ~(0x0F);
+LATD &= ~(0x0F);
+
+``` 
+## Ubicación en el diagrama:
+- Parte derecha, bloque PORTD (RD0-RD7)
+
+Función: Usa RD0 a RD3 como salidas digitales para el control de motores con el puente H (por ejemplo, L298N).
+## 4. PWM (CCP1 y CCP2)
+```c 
+TRISCbits.TRISC2 = 0;         // RC2 -> CCP1
+TRISCbits.TRISC1 = 0;         // RC1 -> CCP2
+CCP1CON = 0b00001100;         // Modo PWM
+CCP2CON = 0b00001100;
+CCPR1L = 0;
+CCPR2L = 0;
+
+```
+## Ubicación en el diagrama:
+- Parte inferior: Bloques ECCP1 (CCP1) y ECCP2 (CCP2)
+
+- Asociado con PORTC (RC1, RC2)
+
+Función: Configura los módulos de PWM usando los periféricos CCP1 y CCP2 para controlar la velocidad de los motores.
+## 5. Timer2 (base de tiempo del PWM)
+```c 
+PR2 = 60;
+T2CON = 0b00000111;
+
+
+```
+## Ubicación en el diagrama:
+- Ubicación en el diagrama:
+
+- Parte inferior, bloque Timer2 / Timer4 / Timer6
+
+Función: Genera el periodo para el PWM. Timer2 controla la frecuencia del PWM usado por CCP1 y CCP2.
+## 6. Memoria y lógica de control
+```c 
+// Uso de while(1), condiciones, funciones, etc.
+
+```
+## Ubicación en el diagrama:
+- Ubicación en el diagrama:
+
+- Parte central: bloques Instruction Decode and Control, ALU, Program Counter, etc.
+
+Función: Se utilizan los bloques centrales del CPU para ejecución de instrucciones, operaciones lógicas, comparación y llamadas a funciones.
+## 7.  LCD (manejo por GPIOs digitales)
+```c 
+RS = LATDbits.LATD5;
+EN = LATDbits.LATD6;
+D4-D7 = LATCbits.LATC4 a LATC7;
+
+
+```
+## Ubicación en el diagrama:
+- Ubicación en el diagrama:
+
+- PORTD y PORTC: pines usados como salida digital para comunicación con LCD (modo 4 bits).
+
 
 ## Diagramas
 
