@@ -484,9 +484,12 @@ Configura los módulos CCP1 y CCP2 del PIC para generar PWM (Pulse Width Modulat
 
 De acuerdo con la imagen, el **período de la señal PWM** está dado por la fórmula:
 
+**Usamos la fórmula:**
+
 $$
-Período_{PWM} = (PR2 + 1) \times 4 \times T_{OSC} \times (Prescaler)
+\text{Periodo}_{\text{PWM}} = (\text{PR2} + 1) \times 4 \times T_{\text{OSC}} \times \text{Prescaler}
 $$
+
 
 Donde:
 
