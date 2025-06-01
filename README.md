@@ -490,7 +490,6 @@ $$
 \text{Periodo}_{\text{PWM}} = (\text{PR2} + 1) \times 4 \times T_{\text{OSC}} \times \text{Prescaler}
 $$
 
-
 Donde:
 
 - `PR2` es el valor del registro del temporizador 2 que define el período del PWM.
@@ -542,10 +541,15 @@ Bits:
 ### Supuestos:
 
 - Oscilador:  
-  $$
-  F_{OSC} = 16\ \text{MHz} \Rightarrow T_{OSC} = 62.5\ \text{ns}
-  $$
+
+$$
+\
+F_{OSC} = 16\ \text{MHz} \Rightarrow T_{OSC} = 62.5\ \text{ns}
+\
+$$
+
 - Prescaler: 16
+
 - `PR2 = 60`
 
 ---
