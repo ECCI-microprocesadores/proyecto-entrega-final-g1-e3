@@ -610,10 +610,9 @@ void setDuty1(unsigned char val) {
 Aquí el valor val es un número entre 0 y 255, que representa directamente el ciclo útil (Duty Cycle). Entonces puedes calcular el ciclo útil con:
 
 **Cálculo del Duty Cycle**
+
 $$
-\
 DutyCycle = \frac{val}{255} \times 100
-\
 $$
 
 ### Ejemplos prácticos
