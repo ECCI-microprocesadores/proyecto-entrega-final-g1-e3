@@ -612,11 +612,9 @@ Aquí el valor val es un número entre 0 y 255, que representa directamente el c
 **Cálculo del Duty Cycle**
 $$
 \
-\text{DutyCycle} = \frac{val}{255} \times 100\%
+DutyCycle = \frac{val}{255} \times 100
 \
 $$
-
----
 
 ### Ejemplos prácticos
 
