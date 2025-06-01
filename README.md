@@ -558,21 +558,22 @@ $$
 
 $$
 \
-\text{Período}_{PWM} = (PR2 + 1) \times 4 \times T_{OSC} \times \text{Prescaler}
+Período_{PWM} = (PR2 + 1) \times 4 \times T_{OSC} \times \text{Prescaler}
 \
 $$
-
+---
 $$
 \
 = (60 + 1) \times 4 \times 62.5\ \text{ns} \times 16
 \
 $$
+---
 $$
 \
 = 61 \times 4 \times 62.5\ \text{ns} \times 16
 \
 $$
-
+---
 $$
 \
 = 61 \times 4 \times 1000\ \text{ns} = 61 \times 4 \times 1\ \mu s = 244\ \mu s
