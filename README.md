@@ -1357,13 +1357,13 @@ Cierra la directiva de inclusión condicional iniciada al comienzo (#ifndef LCD_
 | [control.h](/CODIGOS/control.h)   | Archico encabezado    | h     |
 | [control.c](/CODIGOS/control.c)   | Declaración de variables     | C     |
 
-**ENLACE A CODIGOS `lcd,c` y `lcd.h`.**
+**ENLACE A CÓDIGOS `lcd.c` y `lcd.h`**
 
-| Archivo          | Descripción           | Tipo       |
-|------------------|-----------------------|------------|
-|
-| [lcd.h](/CODIGOS/lcd.h)   | Archico encabezado    | h     |
-| [lcd.c](/CODIGOS/lcd.c)   | Declaración de variables     | C     |
+| Archivo                         | Descripción                         | Tipo |
+|---------------------------------|-------------------------------------|------|
+| [lcd.h](/CODIGOS/lcd.h)         | Archivo de encabezado del LCD       | `.h` |
+| [lcd.c](/CODIGOS/lcd.c)         | Implementación de funciones del LCD | `.c` |
+
 
 
 # Diagramas
