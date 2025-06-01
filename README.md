@@ -375,6 +375,66 @@ D4-D7 = LATCbits.LATC4 a LATC7;
 - PORTD y PORTC: pines usados como salida digital para comunicación con LCD (modo 4 bits).
 
 
+# Complicaciones encontradas durante el desarrollo:
+Durante el diseño y construcción del prototipo, se presentaron diversas dificultades técnicas que exigieron soluciones prácticas y mejor comprensión de los componentes electrónicos involucrados. A continuación, se describen las principales complicaciones encontradas:
+ 
+ ## 1. Sobretensión en el LCD:
+Una de las primeras fallas detectadas ocurrió al conectar accidentalmente el display LCD a una fuente de 12V, cuando su operación segura requiere un máximo de 5V. Esta sobretensión causó un daño irreversible al módulo, lo que obligó a reemplazarlo por uno nuevo.
+
+## Aprendizaje: 
+Se comprendió la importancia de verificar siempre los niveles de voltaje antes de realizar conexiones, especialmente en componentes sensibles. Como medida correctiva, se etiquetaron las líneas de alimentación y se implementó el uso de conectores con código de color para minimizar el riesgo de error.
+ 
+ ##  2. Fuente de alimentación del PIC:
+Durante la fase inicial no se identificó que el módulo puente H (L298N) contaba con una salida de 5V que podía usarse para alimentar directamente el microcontrolador. Esto generó confusión y retrasos en la puesta en marcha del sistema.
+
+## Solución:
+ Para garantizar una alimentación estable y segura, se optó por incluir un regulador de voltaje LM7805, el cual convierte los 12V de la batería en 5V regulados, protegiendo así al PIC de posibles fluctuaciones.
+  ## 3. Problemas con sensores TCRT5000:
+Los sensores infrarrojos reflectivos TCRT5000, utilizados para detectar la línea sobre el suelo, presentaron lecturas inestables. Esta inestabilidad afectaba directamente la capacidad del robot para seguir la trayectoria correctamente, provocando movimientos erráticos o pérdida de la línea.
+
+* Causas del problema:
+* La variabilidad en la reflectividad del suelo (brillo o tipo de superficie).
+
+* Ruido eléctrico en las señales de salida de los sensores.
+
+* Lecturas instantáneas sin procesamiento, lo que hacía que cualquier lectura espuria provocara un comportamiento incorrecto.
+
+## Solución implementada:
+Se mejoró la lógica de lectura de los sensores incorporando un sistema de muestreo y votación. En lugar de tomar una sola lectura, se tomaron múltiples muestras en un corto periodo de tiempo. Si al menos 3 de 5 muestras coincidían, se consideraba que la línea estaba presente.
+
+## Ejemplo de código utilizado:
+
+
+```c 
+unsigned char i, countL = 0, countR = 0;
+for (i = 0; i < 5; i++) {
+    if (LS) countL++;      // LS: sensor izquierdo
+    if (RS) countR++;      // RS: sensor derecho
+    __delay_us(read_time); // Pequeño retardo entre lecturas
+}
+
+unsigned char leftValue = (countL >= 3) ? 1 : 0;
+unsigned char rightValue = (countR >= 3) ? 1 : 0;
+
+```
+* Este enfoque simple pero efectivo actúa como un filtro de ruido digital, donde solo se valida una detección si hay consenso en varias muestras. De esta forma, se evita que un solo pulso espurio active la lógica de seguimiento de línea.
+## Resultado:
+Tras aplicar esta técnica, se observó una notable mejora en la estabilidad de detección, especialmente en curvas cerradas y superficies parcialmente reflectantes. El carro respondió con mayor precisión a los cambios de dirección de la línea negra.
+## 4. Robustez del código:
+ Se detectó que la estructura del programa puede mejorarse con funciones modulares, mejor manejo de condiciones límite y filtrado de ruido. Se recomienda implementar rutinas de calibración y validación de señales.
+ ## Aprendizaje:
+
+ * Cada una de estas dificultades aportó significativamente al desarrollo de habilidades prácticas y teóricas, tales como:
+
+* Diseño eléctrico seguro y confiable.
+
+* Integración eficiente de periféricos como sensores y módulos de control.
+
+* Buenas prácticas de programación embebida, incluyendo modularidad, manejo de errores y validación de señales.
+
+* Diagnóstico y solución de fallos en tiempo real, clave en proyectos de robótica móvil.
+
+
 ## Diagramas
 
 
