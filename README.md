@@ -1361,7 +1361,7 @@ Cierra la directiva de inclusión condicional iniciada al comienzo (#ifndef LCD_
 
 | Archivo          | Descripción           | Tipo       |
 |------------------|-----------------------|------------|
-  |
+|
 | [lcd.h](/CODIGOS/lcd.h)   | Archico encabezado    | h     |
 | [lcd.c](/CODIGOS/lcd.c)   | Declaración de variables     | C     |
 
