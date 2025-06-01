@@ -1361,11 +1361,56 @@ Cierra la directiva de inclusión condicional iniciada al comienzo (#ifndef LCD_
 | [lcd.h](/CODIGOS/lcd.h)         | Archivo de encabezado del LCD       | `.h` |
 | [lcd.c](/CODIGOS/lcd.c)         | Implementación de funciones del LCD | `.c` |
 
-
-
 # Diagramas
 
-### **Diagrama   PIC18F45K22**
+## Diagrama de conexiones
+
+![DIAGRAMA](/IMAGENES/DIAGRAMA_CARRO.jpg)
+
+### **Conexiones del Sensor TCRT5000 al PIC18F45K22**
+
+| Sensor TCRT5000 | Descripción                | Pin en el PIC18F45K22 | Modo de uso   |
+|------------------|----------------------------|------------------------|----------------|
+| D0 (Izquierdo)   | Salida digital (comparador) | RB0                   | Entrada digital (LS) |
+| D0 (Derecho)     | Salida digital (comparador) | RB1                   | Entrada digital (RS) |
+| A0 (Izquierdo)   | Salida analógica proporcional | RA0 (opcional)     | Entrada analógica (ADC) |
+| A0 (Derecho)     | Salida analógica proporcional | RA1 (opcional)     | Entrada analógica (ADC) |
+| VCC              | Alimentación (+5V)         | +5V                    | —              |
+| GND              | Tierra                     | GND                    | —              |
+
+### **Conexiones de la Pantalla LCD 16x2 (modo 4 bits)**
+
+| LCD 16x2       | Descripción               | Pin en el PIC18F45K22 | Notas                   |
+|----------------|---------------------------|------------------------|--------------------------|
+| RS             | Registro de control       | RD5                   | Selección de instrucción o datos |
+| EN             | Enable                    | RD6                   | Activa la lectura/escritura |
+| D4             | Datos bit 4               | RC4                   | Modo 4 bits              |
+| D5             | Datos bit 5               | RC5                   | Modo 4 bits              |
+| D6             | Datos bit 6               | RC6                   | Modo 4 bits              |
+| D7             | Datos bit 7               | RC7                   | Modo 4 bits              |
+| VSS            | Tierra                    | GND                   | —                        |
+| VDD            | Alimentación              | +5V                   | —                        |
+| V0             | Contraste                 | Potenciómetro         | Control de contraste     |
+| RW             | Lectura/Escritura         | GND                   | Siempre escritura (RW = 0) |
+| A (LED+)       | Luz de fondo positiva     | +5V (via resistencia) | Iluminación              |
+| K (LED−)       | Luz de fondo negativa     | GND                   | Iluminación              |
+
+### **Conexiones del Módulo L298N al PIC18F45K22**
+
+| Módulo L298N  | Descripción                | Pin en el PIC18F45K22 | Notas                   |
+|----------------|----------------------------|------------------------|--------------------------|
+| IN1            | Motor A control 1          | RD0                   | Definido como IN1        |
+| IN2            | Motor A control 2          | RD1                   | Definido como IN2        |
+| IN3            | Motor B control 1          | RD2                   | Definido como IN3        |
+| IN4            | Motor B control 2          | RD3                   | Definido como IN4        |
+| ENA            | PWM Motor A                | RC2 (CCP1)            | Control de velocidad     |
+| ENB            | PWM Motor B                | RC1 (CCP2)            | Control de velocidad     |
+| VCC            | Alimentación lógica (5V)   | +5V                   | Fuente para el L298N     |
+| GND            | Tierra                     | GND                   | —                        |
+| 12V (VSS)      | Alimentación de motor      | Fuente externa (12V)  | Potencia del motor       |
+
+
+## **Diagrama   PIC18F45K22**
 
 ![DIAGRAMA](/IMAGENES/DIAGRAMA%20(2).png)
 
