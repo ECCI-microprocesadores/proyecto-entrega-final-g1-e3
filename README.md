@@ -557,13 +557,7 @@ $$
 ### Usamos la fórmula:
 
 $$
-\ 
 Período_{PWM} = (PR2 + 1) \times 4 \times T_{\text{OSC}} \times \text{Prescaler}
-\
-$$
----
-$$
-\text{Período}_{\text{PWM}} = (PR2 + 1) \times 4 \times T_{\text{OSC}} \times \text{Prescaler}
 $$
 
 $$
